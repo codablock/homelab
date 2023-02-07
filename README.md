@@ -7,6 +7,10 @@ It's still a very young Homelab and thus doesn't do a lot. It basically just set
 usually needed (e.g. Cilium, cert-manager, ingress-nginx, metallb, ...) and then deploys a
 small set of applications I need at home. This will surely grow over tine.
 
+My Homelab is based on multiple Raspberry Pis that act as the K8s control plane and worker nodes.
+I plan to enlarge this cluster when necessary with NUCs or comparable hardware to also get some x64
+nodes. Storage is simply solved via a Synology DS and NFS volumes.
+
 ## Why Kluctl?
 
 Most K8s Homelabs rely on Flux or ArgoCD to implement a GitOps style workflow. I started to
