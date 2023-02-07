@@ -1,0 +1,5 @@
+deployments:
+  - path: namespaces
+    barrier: true
+  - path: ix500-scanner
+  - include: homebridge

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mosquitto-config
+data:
+  mosquitto.conf: |
+    listener 1883
+    
+    per_listener_settings true
+    allow_anonymous false
+    password_file /mosquitto/config/mosquitto.passwd
+
+    persistence false
+    #persistence_location /mosquitto/data
+    #autosave_interval 1800
+  mosquitto.passwd: |
+    {{ apps.homebridge.mosquitto.passwd }}

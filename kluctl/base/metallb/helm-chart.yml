@@ -1,0 +1,6 @@
+helmChart:
+  repo: https://metallb.github.io/metallb
+  chartName: metallb
+  chartVersion: 0.13.7
+  releaseName: metallb
+  namespace: kube-system

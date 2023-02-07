@@ -1,0 +1,6 @@
+resources:
+  - pvc.yaml
+  - ix500-scanner.yaml
+  - scan2pdf.yaml
+
+namespace: apps-ix500-scanner

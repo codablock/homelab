@@ -1,0 +1,7 @@
+# copied from kops addon
+extraArgs:
+  - --kubelet-insecure-tls=true
+  - --kubelet-preferred-address-types=InternalIP,Hostname,ExternalIP
+
+apiService:
+  create: true

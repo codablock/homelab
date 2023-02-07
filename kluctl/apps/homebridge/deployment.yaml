@@ -1,0 +1,6 @@
+deployments:
+  - path: mosquitto
+  - path: shelly-mqtt
+  - path: homebridge
+
+overrideNamespace: apps-homebridge

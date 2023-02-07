@@ -1,0 +1,5 @@
+paho-mqtt==1.5.1
+requests==2.24.0
+pyyaml==5.3.1
+ipcalc==1.99.0
+six==1.16.0

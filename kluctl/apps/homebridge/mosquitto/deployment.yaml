@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mosquitto
+  labels:
+    app: mosquitto
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mosquitto
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+    spec:
+      containers:
+        - name: mosquitto
+          image: eclipse-mosquitto:2.0.14
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            #- mountPath: /mosquitto/data
+            #  name: mosquitto-data
+            - mountPath: /mosquitto/config
+              name: mosquitto-config
+          #securityContext:
+          #  runAsUser: 1000
+          #  runAsGroup: 1000
+      volumes:
+        #- name: mosquitto-data
+        #  persistentVolumeClaim:
+        #    claimName: mosquitto-data
+        - name: mosquitto-config
+          configMap:
+            name: mosquitto-config

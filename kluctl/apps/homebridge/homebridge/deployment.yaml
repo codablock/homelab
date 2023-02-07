@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homebridge
+  labels:
+    app: homebridge
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: homebridge
+  template:
+    metadata:
+      labels:
+        app: homebridge
+    spec:
+      hostNetwork: true
+      containers:
+        - name: homebridge
+          image: ghcr.io/oznu/homebridge:2022-11-14
+          imagePullPolicy: Always
+          env:
+            - name: TZ
+              value: {{ apps.timezone }}
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: HOMEBRIDGE_CONFIG_UI
+              value: "1"
+            - name: ENABLE_AVAHI
+              value: "1"
+          volumeMounts:
+            - mountPath: /homebridge
+              name: homebridge-data
+          #securityContext:
+          #  runAsUser: 1000
+          #  runAsGroup: 1000
+      volumes:
+        - name: homebridge-data
+          persistentVolumeClaim:
+            claimName: homebridge-data

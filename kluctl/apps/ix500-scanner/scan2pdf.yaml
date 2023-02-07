@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scan2pdf
+  labels:
+    app: scan2pdf
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: scan2pdf
+  template:
+    metadata:
+      labels:
+        app: scan2pdf
+    spec:
+      containers:
+        - name: scan2pdf
+          image: docker-registry.homelab.codablock.de/scan2pdf
+          imagePullPolicy: Always
+          env:
+            - name: TZ
+              value: {{ apps.timezone }}
+          volumeMounts:
+            - mountPath: /pdfs
+              name: pdfs
+          securityContext:
+            privileged: true
+      volumes:
+        - name: pdfs
+          persistentVolumeClaim:
+            claimName: pdfs

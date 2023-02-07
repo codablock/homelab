@@ -1,0 +1,6 @@
+nfs:
+  server: {{ storage.nfs.server }}
+  path: {{ storage.nfs.base_path }}
+
+storageClass:
+  name: nfs

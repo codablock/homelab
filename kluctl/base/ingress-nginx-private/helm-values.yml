@@ -1,0 +1,22 @@
+controller:
+  ingressClass: nginx-private
+  ingressClassResource:
+    name: nginx-private
+    controllerValue: k8s.io/ingress-nginx-private
+  electionID: ingress-nginx-private-controller-leader
+
+  metrics:
+    enabled: true
+
+  replicaCount: 1
+
+  config:
+    hsts: "true"
+    hsts-include-subdomains: "true"
+    hsts-max-age: "31622400"
+    hsts-preload: "true"
+    enable-ocsp: "true"
+
+  service:
+    externalTrafficPolicy: Local
+    loadBalancerIP: {{ lbs.registry }}

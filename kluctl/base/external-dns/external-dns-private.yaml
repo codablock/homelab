@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: external-dns-private
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: external-dns-private
+  template:
+    metadata:
+      labels:
+        app: external-dns-private
+    spec:
+      serviceAccountName: external-dns
+      containers:
+        - name: external-dns
+          image: k8s.gcr.io/external-dns/external-dns:v0.13.1
+          args:
+            - --registry=txt
+            - --txt-prefix=external-dns-private
+            - --txt-owner-id=k8s
+            - --provider=rfc2136
+            - --rfc2136-host={{ net.dns }}
+            - --rfc2136-port=53
+            - --rfc2136-zone={{ dns.base }}
+            - --rfc2136-tsig-secret-alg=hmac-sha512
+            - --rfc2136-tsig-axfr
+            - --source=ingress
+            - --source=service
+            - --domain-filter={{ dns.base }}
+            - --rfc2136-min-ttl=60s
+          env:
+            - name: EXTERNAL_DNS_RFC2136_TSIG_KEYNAME
+              valueFrom:
+                secretKeyRef:
+                  name: external-dns
+                  key: rfc2136_tsig_keyname
+            - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: external-dns
+                  key: rfc2136_tsig_secret
+            - name: EXTERNAL_DNS_RFC2136_TSIG_SECRET_ALG
+              valueFrom:
+                secretKeyRef:
+                  name: external-dns
+                  key: rfc2136_tsig_secret_alg

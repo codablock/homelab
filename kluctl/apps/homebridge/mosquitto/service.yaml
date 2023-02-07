@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mosquitto
+spec:
+  selector:
+    app: mosquitto
+  type: LoadBalancer
+  loadBalancerIP: {{ lbs.mosquitto }}
+  ports:
+    - protocol: TCP
+      port: 1883
+      targetPort: 1883

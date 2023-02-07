@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "wait-cilium"
+  namespace: kube-system
+  annotations:
+    kluctl.io/hook: pre-deploy-initial
+spec:
+  template:
+    metadata:
+      name: "wait-cilium"
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: wait-cilium
+          image: "alpine"
+          command:
+            - echo
+            - ok

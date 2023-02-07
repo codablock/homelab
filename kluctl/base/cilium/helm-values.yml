@@ -1,0 +1,15 @@
+nodePort:
+  enabled: true
+
+kubeProxyReplacement: strict
+
+policyEnforcementMode: default
+
+hubble:
+  tls:
+    auto:
+      method: cronJob
+  relay:
+    enabled: true
+  ui:
+    enabled: true

@@ -1,0 +1,6 @@
+helmChart:
+  repo: https://emberstack.github.io/helm-charts
+  chartName: reflector
+  chartVersion: 6.1.47
+  releaseName: reflector
+  namespace: kube-system

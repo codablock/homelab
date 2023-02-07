@@ -1,0 +1,6 @@
+helmChart:
+  repo: https://helm.twun.io
+  chartName: docker-registry
+  chartVersion: 2.2.2
+  releaseName: docker-registry
+  namespace: kube-system

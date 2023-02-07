@@ -1,0 +1,30 @@
+replicaCount: 1
+
+#service:
+#  type: NodePort
+#  port: 5000
+#  nodePort: 32767
+
+ingress:
+  enabled: true
+  className: nginx-private
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 1000m
+  hosts:
+    - docker-registry.{{ dns.base }}
+  tls:
+    - hosts:
+        - docker-registry.{{ dns.base }}
+      secretName: wildcard-ssl-cert
+
+persistence:
+  enabled: true
+  size: 10Gi
+  storageClass: nfs
+
+secrets:
+  htpasswd: {{ registry.htpasswd }}
+
+tolerations:
+  - key: CriticalAddonsOnly
+    operator: Exists

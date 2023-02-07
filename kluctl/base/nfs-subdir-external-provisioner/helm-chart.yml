@@ -1,0 +1,7 @@
+helmChart:
+  repo: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
+  chartName: nfs-subdir-external-provisioner
+  chartVersion: 4.0.17
+  releaseName: nfs-subdir-external-provisioner
+  namespace: kube-system
+

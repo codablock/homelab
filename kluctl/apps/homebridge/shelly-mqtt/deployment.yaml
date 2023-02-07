@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shelly-mqtt
+  labels:
+    app: shelly-mqtt
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: shelly-mqtt
+  template:
+    metadata:
+      labels:
+        app: shelly-mqtt
+    spec:
+      containers:
+        - name: shelly-mqtt
+          image: docker-registry.homelab.codablock.de/shelly-mqtt
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: /shelly-mqtt/config.yaml
+              name: shelly-mqtt-config
+              subPath: config.yaml
+      volumes:
+        - name: shelly-mqtt-config
+          secret:
+            secretName: shelly-mqtt-config

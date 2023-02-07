@@ -1,0 +1,13 @@
+vars:
+  - file: config/common.yaml
+  - file: secrets/common.sops.yaml
+  - file: secrets/mqtt-shelly-config.sops.yaml
+
+deployments:
+  - include: base
+  - barrier: true
+  - include: apps
+
+commonLabels:
+  kluctl.io/target: {{ target.name }}
+  kluctl.io/deployment: homelab

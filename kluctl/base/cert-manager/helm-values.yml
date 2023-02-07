@@ -1,0 +1,10 @@
+installCRDs: true
+
+extraArgs:
+  # can't rely on the internal DNS server as it will not resolve the route53 DNS records
+  - --dns01-recursive-nameservers=8.8.8.8:53
+  - --dns01-recursive-nameservers-only
+
+tolerations:
+  - key: CriticalAddonsOnly
+    operator: Exists

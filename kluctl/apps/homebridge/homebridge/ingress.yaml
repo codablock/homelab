@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: homebridge
+  labels:
+    app: homebridge
+spec:
+  ingressClassName: nginx-private
+  rules:
+    - host: homebridge.{{ dns.base }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: homebridge
+                port:
+                  number: 8581
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - homebridge.{{ dns.base }}
+      secretName: wildcard-ssl-cert
