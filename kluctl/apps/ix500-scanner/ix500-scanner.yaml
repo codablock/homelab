@@ -38,4 +38,4 @@ spec:
           persistentVolumeClaim:
             claimName: pdfs
       nodeSelector:
-        kubernetes.io/hostname: k8s-0
+        kubernetes.io/hostname: k8s-4
